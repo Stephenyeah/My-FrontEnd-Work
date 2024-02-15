@@ -6,61 +6,62 @@ function TodoList() {
         date: ''
     });
     const [todos, setTodos] = useState([]);
-    const [filter, setFilter] = useState('');
 
     
     const handleClick = () =>{
         if(todo.description && todo.date){
             setTodos([...todos,todo]);
             setTodo({ description:'', date:''});
-            filteredTodos();
+
         }
+
         else{
             alert("Type a discription first");
         }
         
     }
-    const handleDelete = (index) => {
-        setTodos(todos.filter((todo,i) => i !==index
-        ));
-    }
-    const filteredTodos = todos.filter(todo => {
-        const descriptionMatch = todo.description.toLowerCase().includes(filter.toLowerCase());
-        const dateMatch = todo.date.includes(filter);
-        return descriptionMatch || dateMatch;
-    });
+
+
 
     return(
-        <>
+        <div className="todo-container">
             <br />
+            <div className="add-todo">Descritption: 
             <input 
                 placeholder="Description"
                 value={todo.description}
                 onChange={e => setTodo({...todo, description: e.target.value})}
-            />
+            />Date:
             <input
                 type="date"
                 value ={todo.date}
                 onChange ={e => setTodo({...todo, date: e.target.value})}
             />
-            <button onClick={handleClick}>Add Todo</button>
-
+            <button onClick={handleClick}>  Add  </button>
+            </div>
  
             <table>
+            <thead>
+                <tr>
+                <th>Date</th>
+                <th>Description</th>
+                </tr>
+            </thead>
                 <tbody>
                     {
                         todos.map((todo,index) => 
                             <tr key={index}>
-                            <td>{todo.description}  </td>
-                            <td> {todo.date}</td>
-                            <td><button onClick={() => handleDelete(index)}>Delete</button></td>
+                           <td> {todo.date}</td>
+                            <td>{todo.description}</td>
+                            
+                           
                         </tr>
                          )
                     }
                 </tbody>
             </table>
 
-        </>
+        </div>
     );
 
 }
