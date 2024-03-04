@@ -25,64 +25,43 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  justify-content: center;
   align-items: center;
   min-width: 320px;  
-  min-height: 100vh;
+  min-height: 200px;
   flex-direction: column;
 }
-.bd-navbar::after {
+.container-fluid{
   position: absolute;
   inset: 0;
   z-index: -1;
   display: block;
+  height: 250px;
   content: "";
-  background-image: linear-gradient(rgba(var(--bd-violet-rgb), 1), rgba(var(--bd-violet-rgb), 0.95));
+  background-color: #242424;
 }
 
-.todo-container {
-  width: auto;
-  
-  margin: 0 auto;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;  
-  font-family: Arial, sans-serif;
 
-}
 
 .add-todo {
   margin-bottom: 20px;
   
 }
 
-.add-todo input[type="text"] {
-  padding: 10px;
-  margin-right: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+
+.navbar-brand {
+  padding-top: var(--bs-navbar-brand-padding-y);
+  padding-bottom: var(--bs-navbar-brand-padding-y);
+  margin-right: var(--bs-navbar-brand-margin-end);
+  font-size: 50px;
+  color: white;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-table, th, td {
-  border: 1px solid #ddd;
-}
-
-th, td {
-  text-align: left;
-  padding: 8px;
-}
-
-th {
-  background-color: #f2f2f2;
-}
 h1 {
-  font-size: 3.2em;
+  font-size: 14.2em;
   line-height: 1.1;
 }
 

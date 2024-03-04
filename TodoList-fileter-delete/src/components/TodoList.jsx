@@ -1,4 +1,6 @@
 import { useState } from "react";
+import '../App.css';
+import './TodoList.css';
 
 function TodoList() {
     const [todo, setTodo] = useState({
@@ -28,14 +30,15 @@ function TodoList() {
 
 
     return(
-        <div className="todo-container">
+        
+        <div className="todoList">
             <br />
-            <div className="add-todo">Descritption: 
+            <div className="input"><span>Descritption: </span>
             <input 
                 placeholder="Description"
                 value={todo.description}
                 onChange={e => setTodo({...todo, description: e.target.value})}
-            />Date:
+            /><span>Date:</span>
             <input
                 type="date"
                 value ={todo.date}
@@ -44,7 +47,7 @@ function TodoList() {
             <button onClick={handleClick}>  Add  </button>
             </div>
  
-            <table>
+            <table className="table table-striped">
             <thead>
                 <tr>
                 <th>Date</th>
@@ -57,7 +60,7 @@ function TodoList() {
                             <tr key={index}>
                            <td> {todo.date}</td>
                             <td>{todo.description}</td>
-                            <td><button onClick={() => handleDelete(index)}>Delete</button></td>
+                            <td><button className="btn btn-danger" onClick={() => handleDelete(index)}>Delete</button></td>
                            
                         </tr>
                          )
