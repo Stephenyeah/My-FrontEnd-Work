@@ -6,6 +6,11 @@ import "ag-grid-community/styles/ag-theme-material.css";
 import { AgGridReact } from "ag-grid-react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './components/TodoTable.css';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers';
+import { formatISO } from 'date-fns';
+
 
 function App() {
     const [todo, setTodo] = useState({
@@ -34,6 +39,10 @@ function App() {
         }
     };
 
+    const handleChangeDate = (date) => {
+        setTodo({ ...todo, date: date.toISOString() });// Setting the date object directly
+    };
+
     return (
         <div className="todoList">
             <br />
@@ -47,11 +56,21 @@ function App() {
                 value={todo.priority}
                 onChange={(e) => setTodo({ ...todo, priority: e.target.value })}
             />
-            <input
+
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                    value={todo.date}
+                    onChange={date => handleChangeDate(date)}
+                    renderInput={(props) => <input type="text" {...props} />}
+                />
+             
+            </LocalizationProvider>
+
+            {/* <input
                 type="date"
                 value={todo.date}
                 onChange={(e) => setTodo({ ...todo, date: e.target.value })}
-            />
+            /> */}
 
             <button onClick={handleClick}>Add Todo</button>     
             <button onClick={handleDelete}>Delete</button>   
