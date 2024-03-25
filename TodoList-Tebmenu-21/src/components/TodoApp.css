@@ -1,7 +1,0 @@
-
-.todolist{
-  margin: 0 auto; /* Center horizontally */
-  display: flex; /* Use flexbox */
-  justify-content: center; /* Center content horizontally */
-  align-items: center; /* Center content vertically */
-}
