@@ -8,9 +8,6 @@ import '@testing-library/jest-dom/vitest';
 //   render(<App />);
 //   const header = screen.getByText(/My Todolist/i);
 //   expect(header).toBeInTheDocument();
-
-
-
 // });
 
 test("add todo", () => {
@@ -24,4 +21,10 @@ test("add todo", () => {
     fireEvent.click(button);
     const table = screen.getByRole("table");
     expect(table).toHaveTextContent(/go to coffee/i);
+
+    // Click on Clear button
+    fireEvent.click(screen.getByText("Clear"));
+
+    // Check if todo is cleared
+    expect(table).not.toHaveTextContent(/go to coffee/i);
   });
