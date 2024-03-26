@@ -8,7 +8,8 @@ const TodoTable = ({ todos, gridRef }) => {
     const columnDefs = [
         { headerName: "Description", field: "description", sortable: true, filter: true },
         { headerName: "Priority", field: "priority", sortable: true, filter: true, cellStyle: params => params.value === "high" ? { color: 'red' } : { color: 'blue' } },
-        { headerName: "Date", field: "date", sortable: true, filter: true },
+        { headerName: "Due date", field: "date", sortable: true, filter: true, 
+        },
     ];
 
     return (
