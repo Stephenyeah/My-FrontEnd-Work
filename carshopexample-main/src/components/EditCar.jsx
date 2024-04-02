@@ -3,10 +3,12 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
-import { updateCar } from '../carapi';
-import CarDialogContent from './CarDialogContent';
+import TextField from '@mui/material/TextField';
+import DialogContent from '@mui/material/DialogContent';
 
-export default function EditCar({ cardata, fetchCars }) {
+
+export default function EditCar({ data, updateCar }) {
+  const [open, setOpen] = useState(false);
   const [car, setCar] = useState({
     brand: '',
     model: '',
@@ -15,19 +17,19 @@ export default function EditCar({ cardata, fetchCars }) {
     year: '',
     price: ''
   });
-  const [open, setOpen] = useState(false);
+  
 
   const handleClickOpen = () => {
-    console.log(cardata);
-    setCar({
-      brand: cardata.brand,
-      model: cardata.model,
-      color: cardata.color,
-      fuel: cardata.fuel,
-      price: cardata.price,
-      year: cardata.year
-    })
     setOpen(true);
+    console.log(data);
+    setCar({
+      model: data.model,
+      brand: data.brand,
+      color: data.color,
+      fuel: data.fuel,
+      modelYear: data.modelYear,
+      price: data.price
+    })
   };
 
   const handleClose = () => {
@@ -35,24 +37,71 @@ export default function EditCar({ cardata, fetchCars }) {
   };
 
   const handleSave = () => {
-    updateCar(car, cardata._links.car.href)
-    .then(() => fetchCars())
-    
+    updateCar(data._links.car.href, car)    
     handleClose();
   }
 
-  const handleChange = (event) => {
-    setCar({...car, [event.target.name]: event.target.value });
-  }
 
   return (
     <>
-      <Button size="small" onClick={handleClickOpen}>
+      <Button variant="outlined" onClick={handleClickOpen}>
         Edit
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+      >
         <DialogTitle>Update Car</DialogTitle>
-        <CarDialogContent car={car} handleChange={handleChange} />
+        <DialogContent>
+          <TextField
+            margin="dense"
+            label="Brand"
+            value={car.brand}
+            onChange={e => setCar({...car, brand: e.target.value})}
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            margin="dense"
+            label="Model"
+            value={car.model}
+            onChange={e => setCar({...car, model: e.target.value})}
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            margin="dense"
+            label="Color"
+            value={car.color}
+            onChange={e => setCar({...car, color: e.target.value})}
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            margin="dense"
+            label="Fuel"
+            value={car.fuel}
+            onChange={e => setCar({...car, fuel: e.target.value})}
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            margin="dense"
+            label="Year"
+            value={car.modelYear}
+            onChange={e => setCar({...car, modelYear: e.target.value})}
+            fullWidth
+            variant="standard"
+          />
+          <TextField
+            margin="dense"
+            label="Price (€)"
+            value={car.price}
+            onChange={e => setCar({...car, price: e.target.value})}
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={handleSave}>Save</Button>
